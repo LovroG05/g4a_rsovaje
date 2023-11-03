@@ -1,0 +1,4 @@
+[<Element[x=33, y=551]>, <Element[x=33, y=550]>, <Element[x=33, y=549]>, <Element[x=33, y=548]>, <Element[x=33, y=547]>]
+[<Element[x=33, y=548]>, <Element[x=33, y=547]>, <Element[x=33, y=546]>, <Element[x=33, y=545]>, <Element[x=33, y=544]>]
+[<Element[x=33, y=548]>, <Element[x=33, y=547]>, <Element[x=33, y=546]>, <Element[x=33, y=545]>, <Element[x=33, y=544]>]
+[<Element[x=33, y=546]>, <Element[x=33, y=545]>, <Element[x=33, y=544]>, <Element[x=34, y=544]>, <Element[x=35, y=544]>]
