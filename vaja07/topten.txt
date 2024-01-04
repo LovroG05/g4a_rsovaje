@@ -1,0 +1,10 @@
+1. user:Lily Davis nick:NebulaNightingale score:67 iger:1 datum:04.01.2024
+2. user:Carter Price nick:SizzlingSparrow score:71 iger:1 datum:04.01.2024
+3. user:Caleb Rodriguez nick:FunkyFrog score:75 iger:1 datum:04.01.2024
+4. user:Grace Lopez nick:WhisperingWildebeest score:77 iger:1 datum:04.01.2024
+5. user:Logan Parker nick:QuantumQuokka score:81 iger:1 datum:04.01.2024
+6. user:Victoria Adams nick:RainbowRhino score:85 iger:1 datum:04.01.2024
+7. user:Elijah Morgan nick:SizzlingStarfish score:93 iger:1 datum:04.01.2024
+8. user:Elise Simmons nick:WhisperingWeasel score:102 iger:2 datum:04.01.2024
+9. user:Elise Simmons nick:WhisperingWeasel score:102 iger:2 datum:04.01.2024
+10. user:Nolan Hayes nick:TwinkleTiger score:397 iger:1 datum:04.01.2024
