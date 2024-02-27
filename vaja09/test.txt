@@ -1,0 +1,22 @@
+beleziRezultat("Tatjana".toCharArray(), 78);
+beleziRezultat("Luka".toCharArray(), 92);
+beleziRezultat("Maja".toCharArray(), 85);
+beleziRezultat("Neža".toCharArray(), 63);
+beleziRezultat("Miha".toCharArray(), 74);
+beleziRezultat("Petra".toCharArray(), 88);
+beleziRezultat("Marko".toCharArray(), 69);
+beleziRezultat("Nika".toCharArray(), 81);
+beleziRezultat("Matej".toCharArray(), 96);
+beleziRezultat("Sara".toCharArray(), 70);
+beleziRezultat("Tjaša".toCharArray(), 83);
+beleziRezultat("Andrej".toCharArray(), 77);
+beleziRezultat("Eva".toCharArray(), 90);
+beleziRezultat("Jan".toCharArray(), 72);
+beleziRezultat("Katarina".toCharArray(), 87);
+beleziRezultat("Žiga".toCharArray(), 68);
+beleziRezultat("Nina".toCharArray(), 79);
+beleziRezultat("Rok".toCharArray(), 94);
+beleziRezultat("Lara".toCharArray(), 71);
+beleziRezultat("Timotej".toCharArray(), 84);
+
+//tip: multi-line cursor
