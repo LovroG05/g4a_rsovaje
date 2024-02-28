@@ -1,0 +1,58 @@
+MariaDB [(none)]> select user();
++------------------+
+| user()           |
++------------------+
+| root@10.0.10.164 |
++------------------+
+1 row in set (0.005 sec)
+
+MariaDB [(none)]> select current_user();
++----------------+
+| current_user() |
++----------------+
+| root@%         |
++----------------+
+1 row in set (0.002 sec)
+
+MariaDB [(none)]> show grants;
++--------------------------------------------------------------------------------------------------------------------------------+
+| Grants for root@%                                                                                                              |
++--------------------------------------------------------------------------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO `root`@`%` IDENTIFIED BY PASSWORD '*41EB914578F5D8E69EDCB2C4144D61497CBEC875' WITH GRANT OPTION |
+| GRANT PROXY ON ''@'%' TO 'root'@'%' WITH GRANT OPTION                                                                          |
++--------------------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.004 sec)
+
+MariaDB [(none)]> select user,host from mysql.user;
++-------------+-----------+
+| User        | Host      |
++-------------+-----------+
+| root        | %         |
+| healthcheck | 127.0.0.1 |
+| healthcheck | ::1       |
+| healthcheck | localhost |
+| mariadb.sys | localhost |
+| root        | localhost |
++-------------+-----------+
+6 rows in set (0.009 sec)
+
+MariaDB [(none)]> show grants for healthcheck@localhost; --spet, zal nimamo pma-ja
++--------------------------------------------------------------------------------------------------------------------+
+| Grants for healthcheck@localhost                                                                                   |
++--------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `healthcheck`@`localhost` IDENTIFIED BY PASSWORD '*5F8C700439E12E1DAA980DD8AF3FBC3E3F3BF72D' |
++--------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.005 sec)
+
+MariaDB [(none)]> show grants for root@127.0.0.1;
+ERROR 1141 (42000): There is no such grant defined for user 'root' on host '127.0.0.1'
+MariaDB [(none)]> show grants for root@localhost;
++----------------------------------------------------------------------------------------------------------------------------------------+
+| Grants for root@localhost                                                                                                              |
++----------------------------------------------------------------------------------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO `root`@`localhost` IDENTIFIED BY PASSWORD '*41EB914578F5D8E69EDCB2C4144D61497CBEC875' WITH GRANT OPTION |
+| GRANT PROXY ON ''@'%' TO 'root'@'localhost' WITH GRANT OPTION                                                                          |
++----------------------------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.005 sec)
+
+MariaDB [(none)]>

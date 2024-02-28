@@ -1,0 +1,222 @@
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.006 sec)
+
+MariaDB [(none)]> create database ABC character set utf8mb4 collate utf8mb4_slovenian_ci;
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ABC                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.006 sec)
+
+MariaDB [(none)]> show create database abc;
+ERROR 1049 (42000): Unknown database 'abc'
+MariaDB [(none)]> show create database test;
+ERROR 1049 (42000): Unknown database 'test'
+MariaDB [(none)]> use abc;
+ERROR 1049 (42000): Unknown database 'abc'
+MariaDB [(none)]> use ABC;
+Database changed
+MariaDB [ABC]> show tables;
+Empty set (0.008 sec)
+
+MariaDB [ABC]> create table eNA (id int primary key, opomba varchar(40) not null);
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [ABC]> show tables;
++---------------+
+| Tables_in_ABC |
++---------------+
+| eNA           |
++---------------+
+1 row in set (0.004 sec)
+
+MariaDB [ABC]> show create table ena;
+ERROR 1146 (42S02): Table 'ABC.ena' doesn't exist
+MariaDB [ABC]> show create table eNA;
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                             |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| eNA   | CREATE TABLE `eNA` (
+  `id` int(11) NOT NULL,
+  `opomba` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovenian_ci |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.005 sec)
+
+MariaDB [ABC]> desc eNA;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int(11)     | NO   | PRI | NULL    |       |
+| opomba | varchar(40) | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.007 sec)
+
+MariaDB [ABC]> use sys; --testa nimamo :(
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [sys]> show tables;
++-----------------------------------------------+
+| Tables_in_sys                                 |
++-----------------------------------------------+
+| host_summary                                  |
+| host_summary_by_file_io                       |
+| host_summary_by_file_io_type                  |
+| host_summary_by_stages                        |
+| host_summary_by_statement_latency             |
+| host_summary_by_statement_type                |
+| innodb_buffer_stats_by_schema                 |
+| innodb_buffer_stats_by_table                  |
+| innodb_lock_waits                             |
+| io_by_thread_by_latency                       |
+| io_global_by_file_by_bytes                    |
+| io_global_by_file_by_latency                  |
+| io_global_by_wait_by_bytes                    |
+| io_global_by_wait_by_latency                  |
+| latest_file_io                                |
+| memory_by_host_by_current_bytes               |
+| memory_by_thread_by_current_bytes             |
+| memory_by_user_by_current_bytes               |
+| memory_global_by_current_bytes                |
+| memory_global_total                           |
+| metrics                                       |
+| processlist                                   |
+| ps_check_lost_instrumentation                 |
+| schema_auto_increment_columns                 |
+| schema_index_statistics                       |
+| schema_object_overview                        |
+| schema_redundant_indexes                      |
+| schema_table_lock_waits                       |
+| schema_table_statistics                       |
+| schema_table_statistics_with_buffer           |
+| schema_tables_with_full_table_scans           |
+| schema_unused_indexes                         |
+| session                                       |
+| session_ssl_status                            |
+| statement_analysis                            |
+| statements_with_errors_or_warnings            |
+| statements_with_full_table_scans              |
+| statements_with_runtimes_in_95th_percentile   |
+| statements_with_sorting                       |
+| statements_with_temp_tables                   |
+| sys_config                                    |
+| user_summary                                  |
+| user_summary_by_file_io                       |
+| user_summary_by_file_io_type                  |
+| user_summary_by_stages                        |
+| user_summary_by_statement_latency             |
+| user_summary_by_statement_type                |
+| version                                       |
+| wait_classes_global_by_avg_latency            |
+| wait_classes_global_by_latency                |
+| waits_by_host_by_latency                      |
+| waits_by_user_by_latency                      |
+| waits_global_by_latency                       |
+| x$host_summary                                |
+| x$host_summary_by_file_io                     |
+| x$host_summary_by_file_io_type                |
+| x$host_summary_by_stages                      |
+| x$host_summary_by_statement_latency           |
+| x$host_summary_by_statement_type              |
+| x$innodb_buffer_stats_by_schema               |
+| x$innodb_buffer_stats_by_table                |
+| x$innodb_lock_waits                           |
+| x$io_by_thread_by_latency                     |
+| x$io_global_by_file_by_bytes                  |
+| x$io_global_by_file_by_latency                |
+| x$io_global_by_wait_by_bytes                  |
+| x$io_global_by_wait_by_latency                |
+| x$latest_file_io                              |
+| x$memory_by_host_by_current_bytes             |
+| x$memory_by_thread_by_current_bytes           |
+| x$memory_by_user_by_current_bytes             |
+| x$memory_global_by_current_bytes              |
+| x$memory_global_total                         |
+| x$processlist                                 |
+| x$ps_digest_95th_percentile_by_avg_us         |
+| x$ps_digest_avg_latency_distribution          |
+| x$ps_schema_table_statistics_io               |
+| x$schema_flattened_keys                       |
+| x$schema_index_statistics                     |
+| x$schema_table_lock_waits                     |
+| x$schema_table_statistics                     |
+| x$schema_table_statistics_with_buffer         |
+| x$schema_tables_with_full_table_scans         |
+| x$session                                     |
+| x$statement_analysis                          |
+| x$statements_with_errors_or_warnings          |
+| x$statements_with_full_table_scans            |
+| x$statements_with_runtimes_in_95th_percentile |
+| x$statements_with_sorting                     |
+| x$statements_with_temp_tables                 |
+| x$user_summary                                |
+| x$user_summary_by_file_io                     |
+| x$user_summary_by_file_io_type                |
+| x$user_summary_by_stages                      |
+| x$user_summary_by_statement_latency           |
+| x$user_summary_by_statement_type              |
+| x$wait_classes_global_by_avg_latency          |
+| x$wait_classes_global_by_latency              |
+| x$waits_by_host_by_latency                    |
+| x$waits_by_user_by_latency                    |
+| x$waits_global_by_latency                     |
++-----------------------------------------------+
+101 rows in set (0.005 sec)
+
+MariaDB [sys]> use ABC;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [ABC]> show tables;
++---------------+
+| Tables_in_ABC |
++---------------+
+| eNA           |
++---------------+
+1 row in set (0.005 sec)
+
+MariaDB [ABC]> insert into eNA values(7,'brb');
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [ABC]> select * from eNA;
++----+--------+
+| id | opomba |
++----+--------+
+|  7 | brb    |
++----+--------+
+1 row in set (0.004 sec)
+
+MariaDB [ABC]> update eNA set opomba='nova' where id=7;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [ABC]> delete from eNA where id=7;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [ABC]> drop table eNA;
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [ABC]> drop database ABC;
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [(none)]>
