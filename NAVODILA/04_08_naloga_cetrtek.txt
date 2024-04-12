@@ -1,0 +1,57 @@
+vaja 04_08
+Binarne tipizirane datoteke
+
+/draft, 18.1.2024, v2
+bo urejena naknadno (ali pa ne)
+
+opomba:
+lahko uporabite poljuben zapis, tudi tistega z ur teoretičnih vsebini
+če delate lastnega, naj bosta prva dva elementa(atributa) zapisa vrste char
+
+cilj:
+celoten CRUD na datoteki zapisov, realiziran čez sekvenco danih nalog;
+tipizirana datoteka : zapis je nedeljiva celota + branje/pisanje z enim 'ukazom'
+
+
+v izhodišču definirajte zapis, pseudo razredni diagram je dan spodaj:
+ 
+  Zapis
+-----------
+ privatni elementi zapisa
+-----------
+ konstruktor
+ toString
+ nastavljalci/getterji
+ vračalci/seterji
+----------
+
+Celoten končen demonstracijski program naj se izvede v sekvenci spodnjih 8 ciljev (izpisi so
+ponovljeni):
+
+Naloga 1. zapisi 10 zapisov v novo datoteko
+Naloga 2. dodaj 5 zapisov na konec obstoječe datoteke
+Naloga 3. izpiši vse zapise z datoteke, vsakega v lastni vrsti
+Naloga 4. odstrani tretji zapis z datoteke
+          in ponovno izpiši vse zapise datoteke (glej Naloga 3)
+Naloga 5. popravi peti zapis datoteke, da bosta oba char imela vrednost 'W'
+          in ponovno izpiši vse
+
+Naloga 6. izpiši število zapisov na datoteki
+
+Posamezne cilje realizirate kot metode.
+
+
+Naloga 7. če še niste: popravite definicijo zapisa tako, da bo vsebovala vsaj en niz fiksne dolžine
+          14 zlogov. Zagotoviti boste morali, da se bo vedno zapisovalo natanko 15 znakov: če bo niz prekratek,
+          ga bo potrebno pred zapisom raztegniti na 15, če bo predolg, ga bo potrebno ustrezno krajšati.
+          Pazite na to, da znak ni ravno enako byte.
+          Opomba: znak je lahko utf-8 kodiran, lahko pa utf-16(unicode), v prvem primeru vsi znaki v zlogih niso
+                  enako dolgi, v drugem primeru pa očitno lahko zapište zgolj 7 znakov
+                  v drugem primeru je manipuilacija lažja: 7xzapiše char, v prvem pa morate določiti število znakov grede
+                  na vsebino (č-2byta, a-1byte,...)
+
+//
+zapisovanje stringov:
+     bytearray
+     string kot char array: da zapišeš zaporedje 7 charov ... (7 x wwriteChar)
+

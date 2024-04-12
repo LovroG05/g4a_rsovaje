@@ -1,0 +1,47 @@
+06_15_RSO04_vaja_01.txt 
+                                          Vaja 15
+                                    (v01., draft , april 2023)
+
+
+viri:
+  . apache   pdfBox, buncyCastle (bc) kripto knjižnice
+  . Time Stamp strežnik : FreeTSA (timestamp strežnik) https://freetsa.org/index_en.php
+  . Bouncy Casle, Java crypto api : https://www.bouncycastle.org/latest_releases.html
+  . https://svn.apache.org/viewvc/pdfbox/tags/2.0.28/examples/src/main/java/org/apache/pdfbox/examples/signature/ : CreateVisibleSignature
+  . https://infra.apache.org/version-control.html#commandline
+  . GNU Wget za Windows, https://eternallybored.org/misc/wget/
+  
+   (
+     https://pdfbox.apache.org/download.cgi   ali maven /   2.0.27, 3.0 alpha 3 / jar-download.com
+	 https://freetsa.org/tsa
+     http://svn.apache.org/repos/asf/
+	 )
+
+
+
+1. Naloga
+     * poenastavitev primera iz pdfbox primerov za vizualno podpisovanje
+	 * uporabite tudi TSA
+
+  Demo/vodeno (pomanjkaje časa, tale navodila so slaba, ...)
+
+    a) prenos potrebnih paketov in priprava
+	b) prenos demo kode
+	c) priprava digitalnega potrdila
+	d) ( priprava slike za potrdilo )
+	d) podpisovanje
+	e) ogled podpisanega dokumenta in preverjanje/preverljivost podpisa
+
+2. Naloga
+    Izberite poljuben pdf in ga podpišite s svojim potrdilom
+
+
+
+-------------------
+
+     v poročilo oddajte : 
+	    poljuben pdf dokument, podpisan z vašim potrdilom, overovljen z 'mojim'. Potrdilo oddajte v nabiralnik
+		z imenom : vaja15_rso4_pdf_podpisan.pdf
+	dokument mora biti elektronsko podpisan, podpis mora biti vizualiziran na dokumentu samem)
+	
+		

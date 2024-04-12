@@ -1,0 +1,179 @@
+06_18_RSO04_vaja_01.txt 
+                                          Vaja 18
+                                    (v01., draft , april 2023)
+
+Teme
+ - html, besedilne datoteke
+ - raba obstoječih razredov/ generiranje PDF
+ - oblikovanje in formalizacija porocila na osnovi podatkov zbirke
+ - podpisovanje in oddaja poročila
+ - nslookup za info o hostu
+
+--------------------------------------------------------------------
+viri:
+ .izdelava potrdila
+ .podpisovanje dokumenta
+ .*_vaja_01_demo.zip
+ .morebitne priročne metode spodaj
+ 
+ * D. Finkle, Html to PDF, 2022, https://github.com/danfickle/openhtmltopdf (april 2023)
+ * Jonathan Hedley, Jsoup,Java htm parser,2023, https://jsoup.org/ (april 2023)
+-------------------------------------------------------
+opomba: demo vsebuje celotno strukturo:
+   -- demo program
+   -- libs                      : vse potrebne javanske knjižnice
+   -- files                     : to so html+css 
+        |
+		 ---- fonts             : dodatni fonti
+		 ---- images            : dodatne slike
+
+
+
+	
+Naloga 1	
+     Upravnemu odboru ste mesečno dolžni oddati poročilo o najboljših desetih igralcih, kot je bilo določeno v vaji 14.   
+     Vsebino da datoteka 2024xyzw_porocilo_naloga3a.html naloge 3 ali GET /api/v2/porocilo naloge 4.
+   
+   Poročilo se izdela kot pdf dokument na listu A4 in je v zgonjem desnem robu podpisano z elektronskim podpisom.
+   Elektronski podpis mora biti vizualno viden, na njem morajo biti vidni podatki podpisnika, datum podpisal
+   in namen podpisa.
+   
+   Primer oblike poročilaz zahtevanimi podatki:
+   
+   
+
+   
+   
+Podjetje XYZ                                                    -----------------------
+(zaupno)                                                       |
+                                                               |    El. podpis
+poročilo: mesec 4, leto 2024                                   |
+filtri:                                                         -----------------------
+       P., M., april
+
+                        TOP IGRALCI
+						          (končno poročilo)
+
+/*     -------------- spodaj vstavite dejanska tabela poročilo, ne demonstracija, kot v primeru --------------						
+st      priimek     ime     datum_rojstva   spol   let_zaposlitve   izplačila
+---------------------------------------------------------------------------------
+1.      Primšok      Martin	2012-03-02	     M		16		  
+2.      Matermotič   Pavel  2013-03-21
+-----------------------------------------------------------------------------------
+                 skupna vsota izplačil vseh desetim:              1234555555 EUR
+*/
+
+   
+izdelano dne : (17.4.2024)                                             Izdelal: P.M.
+ 
+ 
+ 
+ 
+Poročilo zajema zgolj rezultativen podpisan PDF. Iz programa generiranega podpišete s potrdilom, izdelanim v
+eni od predhodnih vaj. Podpišete ga lahko programsko (pridana izpuščena vaja 15) ali uporabite Acrobat reader.
+Postopek za izdelamo .p12 datoteke se nahaja v vaja 15 v primeru, da boste uporabili certifikat iz datoteke!
+ 
+ 
+dodatne zahteva:
+ - pokončna orientacija papirja, A4
+ - vsi zahtevani podatki tabele v isti vrstici 
+ - vsebina v stolpcih tabele naj bo ustrezno poravnana
+ - podpisu mora prejemnik verjeti (kot prejemnik, verjamem le potrdilu, ki sem ga sam podpisal,
+   pridobili ste ga ob zaposlitvi v podjetju - hm., kakšno vajo nazaj )
+ 
+ 
+ 
+ 
+ /--------------------------------------------------------------------------------------------------
+ * Izdelano in ustrezno podpisano poročilo oddate v nabiralnik do konca bloka vaj. 
+ * Vsaka izmed predstavljenih nalog zadosti kriterijem za polovico ocene. Zakasnitve oddaje
+ * se ovrednijo z 20% odbitkom največje možne vrednosti naloge za prepozno oddajo istega dve, in
+ * nadaljnih 20 za vsaka dva dneva zamude.
+ */  
+ 
+
+
+Demo je pridan tej vaji.
+
+
+
+ 
+/**-------------------------------------------------------
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+ 
+/**
+*   java 11+ in readString metoda
+*     prebere celo datoteko v String
+*/ 
+class TestWrite
+{
+    public static String readFile(String fi, Charset encoding) throws IOException {
+        return Files.readString(Paths.get(fi), encoding);
+    }
+ 
+    public static void main(String[] args)
+    {
+        String fileP = "06_16_RSO04_vaja_01.txt";
+ 
+        String vsebina = null;
+        try {
+            vsebina = readFile(fileP, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+ 
+        System.out.println(vsebina);
+    }
+}
+
+/**----------------------------------------------------------------------
+
+// Java Program to Save a String to a File
+// Using Files.writeString() method
+ 
+// Importing required classes
+import java.io.*;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+ 
+/**
+*   no , če smo nio uporabili za branje, pa ga dajmo še za zapisovanje :
+*/
+public class DemoWrite {
+   
+
+    public static void main(String[] args)
+    {
+        // Creating an instance of file
+        Path fi = Paths.get("c:\\users\\dijak\\desktop\\mojFile.html");
+ 
+        // naredimo tabelo 3x5 v html in jo zapišemo kot html fajl
+
+        //dvojne narekovaje v nizu razveljavimo s poševnico pred tem znakom
+        String str = "<html><body><table border=\"1\">";
+		
+		for (int ii=0;i<3;i++){
+		  str += "<tr>";
+		  for (int jj=0;jj<5;jj++)
+		     str += "<td>"+jj+" "+ii+"</td>";
+		  str += "</tr>";
+		}			 
+		str+="</table></body></html>";
+ 
+        try {   // če karkoli narobe s Path , bo spodnja izjema          
+            Files.writeString(fi, str, StandardCharsets.UTF_8);
+        } catch (IOException ex) {  
+            System.out.print("zanic pot");
+        }
+    }
+}
+
+
+        

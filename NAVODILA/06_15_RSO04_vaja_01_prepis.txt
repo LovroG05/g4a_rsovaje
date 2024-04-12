@@ -1,0 +1,78 @@
+06_15_RSO04_vaja_01.txt prepis
+------------------------------------------------------------
+prepis postopka za
+          06_15_RSO04_vaja_01.txt
+ 
+----------------------------------------------------
+1. dobi wget iz https://eternallybored.org/misc/wget/ - skopiraj wget.exe na namizje
+2. odpri ukzano okno in se prestavi v : C:\Users\Dijak\Desktop>
+3. izvedi wget za primer iz pdfbox :
+   wget -r http://svn.apache.org/repos/asf/pdfbox/tags/2.0.27/examples/src/main/java/org/apache/pdfbox/examples/signature/
+   na namizju (tu zagnan wget) dobimo mapo svn.apache.org z veliko vsebine ...
+4. naredimo prazen BlueJ projekt
+5. v koren projekta kopiramo prenešeno, tako da je org iz prenešenega v korenu našega projekta
+    projekt
+	    |--- package.bluej
+        |--- org
+              |--apache
+                  |-----pdfbox ...
+6. potvorimo v BlueJ skreiran projekt:
+     skopiramo datoteko package.bluej iz korena našega projekta v vse poddirektorije pod org    				  
+   
+------------ libs
+A)
+https://www.bouncycastle.org/latest_releases.html skopiramo vseh 8 datotek izpod :
+  signed jar files, za java 1.8 in kasnejše
+  (pri meni so od vseh osmih bc: util, prov, pkix)
+B) 
+https://jar-download.com/artifacts/org.apache.pdfbox/pdfbox
+  dolpotegnemo 'ta zadnjo' (2.0.27)
+ razpakiramo: /pdfbox, fontbox, commons
+ 
+
+-----------
+dodamo knižnice v BlueJ, reastartamo bluej
+-----------
+
+Priprava:
+ za podpis potrebujemo:
+    en nepodpisan PDF dokument
+    eno sliko, ne preveliko recimo 100x100 px
+    certifikat in ključ
+	
+  če imamo certifikat in ključ, jih zapakiramo v .p12 datoteko, uporabite lahko java keytools
+  ali openssl (ta je v učilnici znotraj namestitve xampp-a, če ne še kle drugje)
+
+  v našem primeru dodamo vse v .p12 skupaj s certom podpisnika:
+  
+  openssl pkcs12 -export  -inkey janez.kranjski.key -in janez.kranjski.si.crt 
+                 -certfile rootCA.crt -out janez.kranjski.si.p12  
+  
+   ker je notri private-key, bo hotel imeti geslo ...
+
+ * vse te zadeve damo v mapo projekta:
+    projekt
+	    |--- package.bluej
+		|--- janez.kranjski.si.p12
+		|--- nepodpisan.pdf
+		|--- slika.jpg
+        |--- org
+              |--apache
+                  |-----pdfbox ...
+				  
+ iz BlueJ zaženemo glavno metodo in zaženemo z argumenti, kot jih zahteva program
+ CreateVisualSignate:
+ "janez.kranjsi.si.p12","geslo_za_.12","nepodpisan.pdf","slika.jpg","-tsa","https://freetsa.org/tsr"
+ 
+ obvezni so zgolj prvi trije argumenti
+
+  primer bi moral elektronsko podpisati dokument !
+ 
+ ................................
+ opažanja:
+   a) primeri iz 2.0.27 pdfbox niso več dobri za delo z 3.0.-alpha !
+   b) prevede se zgolj, če:
+       - imate vse potrebne knjižnice
+	   - če imate vse potrebne in pri prenosu nepoškodovane knjižnice
+ ........................	   
+     

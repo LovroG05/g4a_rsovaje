@@ -1,0 +1,135 @@
+rso04 - blok 5/sql+java
+
+vaja 10
+(draft, 26.1.2023, ažurirano 2.2024)
+
+- sql DBMS
+- osnovno rokovanje (raba z minimalnimi sredstvi)
+ 
+cilj današnje vaje je seznaniniti se in usvojiti osnovne postopke pri delu s storitvami sistemov za upravljanje
+relacijskih podatkovnih zbirk. Izvedbo bomo vezali na MariaDB / MySQL (nameščeno v učilnici).
+
+ozadje: 
+  xampp je paket z vnaprej nastavljeno kombinacijo predstavitvenega strežnika(Apache), aplikacijskega strežnika s 
+  skriptnim programskim jezikom PHP, strežnikom podatkovne zbirke MySQL/Mariadb) / še kup drugih, ki so ali pa
+  nepotrebne pri razvoju spletnih storitev: PERL(jezik), FTP strežnik(FileZilla), e-mail strežnik(Mercury, sendmail, 
+  Tomcat, webdav...). Za nas je bistveno, da vsebuje strežnik podatkovne baze in da je po namestitvi brez dodatnih
+  nastavljanj pripravljen za delo. Xampp je dosegljiv na: https://www.apachefriends.org/ . In mimogre, obstaja tudi
+  'portable' varianta.
+  
+  učilnica:
+    namestitev v
+     c:\xampp
+
+  zagon & test razpoložljivosti
+  
+  * zaženemo xampp-control.exe ( search: xampp , zaženemo XAMPP Control Panel
+  * z gumbom zaženemo mysql -> po zagonu se mora stanje obarvati zeleno,pojavi se številka procesa in informacija
+                               o vratih, za katerimi posluša strežnik podatkovne zbirke (3306)
+  * poskusimo z dostopom:
+      a) na desni strani kontrolnega appleta imate gumb 'Shell' (črno okno). Gumb odpre okno do lupine 
+	     operacijskega sistema. V tej lupini so nastavljene vse poti do programov, ki jih potrebujete.
+         Test dosegljivosti naredimo z zagonom odjemalca ( se vedno distribuira poleg strežnika, le zakaj?).
+		 
+        .....>mysql --version [enter]	
+        in
+        .....>mysql -u root -p [enter]                    % hitra prijava: uporabnik=root, gesla ni
+  		Enter password: [enter]
+		MariaDB [(none)]>exit [enter]                     % normalen izhod iz odjemalca
+		
+     b) ker že imamo xampp: v kontrolnem panelu zaženite še Apache (zeleno, vrata 80,443,2pid številki)
+	    odprite brskalnik (npr. Edge(?)) in v naslovno vrstico vpišite : http://localhost/phpmyadmin .
+		Odpre se spletni odjemalec, ki je malo bolj vizualne narave	
+	    ( dejansko imate za /specifično mysql/mariadb/ nameščenih še KUP odjemalcev, v
+          Visual Paradigm, v Eclipse, v NetBeans, v CaseStudio, ...
+
+====> 'resen' strežnik nikoli ne pride brez odjemalca. Vedno obstaja interaktiven odjemalec, ki deluje
+      v lupini OS.
+
+Naslednje 'zadeve' bodo spisane za interaktivni odjemalec, uporabite pa lahko poljubnega, vsak ima možnost 
+izvajanja SQL povpraševanj.
+
+1. izvedemo sekvenco stavkov (stavek je zaključen z ;). Beležite odziv in podajte razlogo
+	  >show databases;
+	  >create database ABC character set utf8mb4 collate utf8mb4_slovenian_ci;
+	  >show databases;
+	  >show create database abc;
+	  >show create database test;
+	  >use abc;
+	  >show tables;
+	  >create table eNA (id int primary key, opomba varchar(40) not null);
+	  >show tables;
+	  >show create table ena;
+	  >desc ena;
+	  >use test;
+	  >show tables;
+	  >use ena;
+	  >insert into ena values(7,'brb');
+	  >select * from ena;
+	  >update ena set opomba='nova' where id=7;
+	  >delete from ena where id=7;
+	  >drop table ena;
+	  >drop database abc;
+	  
+	  (zadnja je zanimiva: žagamo vejo na kateri sedimo)
+	  
+2. Sicer smo v sistemu s katerim delamo priviligiran uporabnik (root), vendar včasih potrebujemo še kakšne 
+   informacije o nas samih in naši vlogi na sistemu, pa mogoče tudi o drugih uporabnikih sistema, njihovih 
+   pravicah, ...
+   Izvedite, beležite odzive in razlago (* v odzivih je posplošujoč znak in je sinonim za vse, povsod, ..):
+
+   >select user();
+   >select current_user();
+   >show grants;
+   >select user,host from mysql.user;
+   >show grants for pma@localhost;
+   >show grants for root@127.0.0.1
+     
+   (grant in revoke za pravice kdaj kasneje)
+   >drop user root@127.0.0.1;
+   >select user,host from mysql.user;
+   
+   ( z drop se ne igrajte preveč, ker se lahko zgodi,da si boste onemogočili dostop. V vsakem primeru se
+    vam sistem restavrira po ponovnem zagonu. )
+
+
+3.
+----------------------------------------------------------
+Spet imamo zapisovanje rezultatov igranja neke igrice in vizualizacijo najboljših desetih (top10). Igralcu beležimo 
+št.igranj in najboljši dosežen rezultat, tokrat pa občasno tudi nagrajujemo najboljše, zato
+shranjujejmo njihove kontaktne podatke (enega ali več).
+
+Tokrat bomo pripravili zgolj strukturo na osnovi spodnjega modela ( že poznanega od prejšnjič ) , ki bo
+primerna za shranjevanje znotraj lokalnega mysql strežnika podatkovne zbirke, ter realizirali organizacijo zbirke
+na supb :
+
+
+   Oseba ( poljudno_ime:A(10),rezultat:N(20), st_iger:N(6), kontakti:Kontakt)
+   Kontakt(vrsta_kontakta:A(50), sklic:A(50))
+    
+      (*  kontakti so spisani kot:  
+                Bebo ,  http://www.bebo.com/Profile.jsp?MemberId=4859134126
+                e-mail,  loli.pop@loli.pop
+				mobilni, +386 00 1212 123
+	   *)
+	   
+	   
+------------------
+Rezultat te naloge bosta tabeli 'oseba' in 'kontakt' znotraj zbirke 'imenik',za katero privzeto nastavite kodiranje
+znakov vrste utf8 in razvrščanje s slovenskim vrstnim redom črk v abecedi. Po kreiranju tabel, obe napolnite s
+testnimi zapisi; pri tem mora imeti vsaj ena oseba več kontaktov, ena enega, in vsaj ena naj bo brez njih.
+Obema tabelama lahko dodate polje v namen rabe primarnih ključev (npr. id), če se vam to zdi potrebno.
+
+V poročilo dodajte datoteko/vsebino datoteke imenik.sql, ki jo dobite tako, da v lupini operacijskega sistema
+izvedete:
+   ....>mysqldump -u root -p imenik > imenik.sql
+   ....>dir imenik.sql
+datoteka se ustvari v isti mapi (delovni, trenutni,...), iz katere ste zagnali mysqldump
+
+
+-----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
+izvedba je nujna za izvedbo nadaljnih vaj. Vaja naj bo izvedena dane, če je to mogoče. Sicer najkasneje do 
+naslednih vaj.
+-----------------------------------------------------------------------------------
+
